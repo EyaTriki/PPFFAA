@@ -1,0 +1,25 @@
+.language-selector {
+    position: relative;
+  }
+  
+  .language-selector .language-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    list-style: none;
+ 
+  }
+  
+  .language-selector .language-list li {
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    font-size: 5px;
+  }
+  
+  .language-selector .language-list li:hover {
+    background-color: #ccc;
+  }
+  
