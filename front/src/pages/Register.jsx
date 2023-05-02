@@ -4,7 +4,7 @@ import { mobile } from '../Responsive';
 import { Link } from 'react-router-dom';
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
-
+import axios from 'axios';
 const Container = styled.div``;
 const Container1 = styled.div`
   width: 100vw;
@@ -86,11 +86,29 @@ const CheckBoxContainer = styled.div`
 
 const Register = () => {
   const [selectedButton, setSelectedButton] = useState(undefined);
-
+  const [data , setData] = useState({name:"" , firstname: "", psdo: "" , email:"" , password:"" ,rpassword: "", role: ""})
   const handleButtonClick = (buttonType) => {
     setSelectedButton(buttonType);
-    console.log(buttonType)
+    setData({...data , role: buttonType})
+    // console.log(buttonType)
   };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setData({ ...data, [event.target.name]: event.target.value });
+    // console.log(data)
+  };
+const handleSubmit = (e) =>{
+  e.preventDefault();
+  if(data.password !== data.rpassword){
+    return(alert("password not match!!!"))
+  }
+  console.log(data)
+  axios.post("http://localhost:8005/api/auth/register" , data).then(
+    res=>{
+      console.log(res.data)
+    }
+  ).catch(err=> console.log(err))
+}
 
   return (
     <Container>
@@ -100,13 +118,13 @@ const Register = () => {
       <Container1>
       <Wrapper>
         <Title>Inscrivez-vous et commencez à apprendre</Title>
-        <Form>
-          <Input placeholder="Prénom" />
-          <Input placeholder="Nom" />
-          <Input placeholder="Pseudo" />
-          <Input placeholder="Email" />
-          <Input placeholder="Mot de passe" />
-          <Input placeholder="Confirmer Mot de passe" />
+        <Form onSubmit={handleSubmit}> 
+          <Input name='name'  placeholder="Prénom" onChange={handleInputChange} />
+          <Input name='firstname' placeholder="Nom" onChange={handleInputChange} />
+          <Input name='psdo' placeholder="Pseudo" onChange={handleInputChange} />
+          <Input name='email' placeholder="Email" onChange={handleInputChange} />
+          <Input name='password' placeholder="Mot de passe" onChange={handleInputChange} />
+          <Input name='rpassword' placeholder="Confirmer Mot de passe" onChange={handleInputChange} />
 
 
           <CheckBoxContainer>

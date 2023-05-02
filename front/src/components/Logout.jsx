@@ -2,23 +2,31 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../redux/userRedux";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
 
 const Logout = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const handleLogout = async () => {
+  const user = useSelector((state) => state.user.currentUser);
+  
+  const handleLogout =  async () => {
+    console.log(user)
     try {
       // Envoyer une demande de déconnexion au serveur
-      await axios.post("/api/auth");
+      await axios.post("http://localhost:8005/api/auth/logout" , user);
       // Déconnecter l'utilisateur
-      dispatch(logout());
+       dispatch(logout());
       // Rediriger l'utilisateur vers la page d'accueil
-      history.push("/");
+      
     } catch (error) {
       console.log(error);
     }
+    
+    localStorage.clear();
+    history.push("/");
+    window.location.reload(false);
+
+
   };
 
   return (

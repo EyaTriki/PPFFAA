@@ -111,6 +111,9 @@ const Navbar = () => {
         <Right>
           {user ? (
             <>
+            
+                <MenuItem style={{ textDecoration: "none" }} >hello ,<Link to="/profile" style={{ textDecoration: "none" }}> {user.name.split(" ")[0]}</Link></MenuItem>
+              
               <Link to="/logout" style={{ textDecoration: "none" }}>
                 <MenuItem>Se déconnecter</MenuItem>
               </Link>
@@ -121,6 +124,7 @@ const Navbar = () => {
                   </Badge>
                 </MenuItem>
               </Link>
+              
             </>
           ) : (
             <>
