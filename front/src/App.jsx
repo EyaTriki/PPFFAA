@@ -16,6 +16,7 @@ import Success from "./pages/Success";
 import { useSelector } from "react-redux";
 import Logout from "./components/Logout";
 import { FileUploader } from "./components/FileUploader";
+import Profile from "./pages/Profile";
 
 const App = () => {
  
@@ -37,6 +38,9 @@ const App = () => {
         </Route>
         <Route path="/success">
           <Success />
+        </Route>
+        <Route path="/profile">
+          <Profile />
         </Route>
         <Route path="/index">
           <FileUploader />
